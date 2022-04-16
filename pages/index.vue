@@ -1,7 +1,7 @@
 <template>
   <div class="py-4">
     <div class="container">
-      <div v-if="loading">
+      <div v-if="loading" class="d-flex align-items-center ms-auto">
         <img src="../assets/loading.gif" alt="" style="margin: 0px auto"  />
       </div>
       <div
@@ -148,14 +148,14 @@ export default {
         description: "",
         category: "",
       },
-      loading: false,
+      loading: true,
     };
   },
 
   mounted() {
     setTimeout(() => {
-      this.loading = true;
-    }, 700);
+      this.loading = false;
+    }, 3000);
   },
 
   computed: {
