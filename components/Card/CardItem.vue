@@ -1,6 +1,5 @@
 <template>
   <div
-  v-if="!task.isDone"
     :class="[
       'item-task d-flex align-items-start border-bottom pt-3 pb-4',
       isGrid ? 'col-12 col-md-6 col-lg-4' : 'col-12',
@@ -15,6 +14,7 @@
       v-model="task.isDone"
     />
     <div
+    v-if="!task.isDone"
       :class="[
         'd-flex flex-column',
         task.isDone ? 'text-decoration-line-through fst-italic' : '',
@@ -31,6 +31,7 @@
       </div>
       <input class="form-control form-control-sm" type="date" />
     </div>
+    <span v-else>Task selesai</span>
   </div>
 </template>
 
@@ -46,6 +47,11 @@ export default {
         required: true,
         default: false,
     },
+    // ss: {
+    //     type: Boolean,
+    //     required: true,
+    //     default: false,
+    // },
   },
 };
 </script>

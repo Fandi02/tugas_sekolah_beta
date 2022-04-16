@@ -8,8 +8,11 @@
         class="title border-bottom d-flex align-items-center justify-content-between py-2"
       >
         <h5>Task</h5>
+        <!-- <button @click="ss = !ss">
+          {{ ss ? 'Show' : 'Hide' }}
+        </button> -->
         <div class="d-flex align-items-center ms-auto">
-          <select>
+          <select @change="orderBy($event)">
             <option value="" hidden>-- Shorting by --</option>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
