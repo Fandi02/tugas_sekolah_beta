@@ -12,6 +12,7 @@
       class="me-2 mt-2"
       :checked="task.isDone"
       v-model="task.isDone"
+      v-on:click.prevent="isDone"
     />
     <div
     v-if="!task.isDone"
@@ -20,9 +21,9 @@
         task.isDone ? 'text-decoration-line-through fst-italic' : '',
       ]"
     >
-      <div class="title-task mb-1">
-        {{ task.title }}
-      </div>
+      <nuxt-link class="title-task mb-1" :to="'app/detail/' + task.id">
+          {{ task.title }}
+      </nuxt-link>
       <div class="description-task small text-muted">
         {{ task.description }}
       </div>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
+
 export default {
   props: {
     task: {
@@ -47,11 +50,16 @@ export default {
         required: true,
         default: false,
     },
-    // ss: {
-    //     type: Boolean,
-    //     required: true,
-    //     default: false,
-    // },
+  },
+
+...mapState("tasks", ["tasks"]),
+
+  methods: {
+    isDone() {
+      // this.$store.commit('tasks/ADD_TASK', this.form);
+      // this.$store.commit('tasks/ADD_TASK', this.form);
+      this.$store.commit('tasks/isDone', this.isDone);
+    },
   },
 };
 </script>
