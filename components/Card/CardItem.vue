@@ -44,6 +44,7 @@ export default {
     task: {
         type: Object,
         default: 'Untitled',
+        
     },
     isGrid: {
         type: Boolean,

@@ -22,6 +22,7 @@ export const state = () => ({
       category: "kuliah",
     },
   ],
+  newTask: null,
 });
 
 export const mutations = {

@@ -51,7 +51,7 @@
       </div>
       <transition-group name="tasks" tag="div" class="list-task row">
         <CardItem
-          v-for="task in resultQuery"
+          v-for="(task, n) in resultQuery"
           :task="task"
           :key="task.id"
           :isGrid="isGrid"
@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="button-wrapper d-flex">
-              <button class="btn btn-primary me-2" type="submit">Save</button>
+              <button class="btn btn-primary me-2" type="submit" @click="addTask">Save</button>
               <button
                 class="btn btn-outline-secondary"
                 @click="isCreating = !isCreating"
@@ -143,6 +143,13 @@ export default {
     setTimeout(() => {
       this.loading = false;
     }, 3000);
+    if (localStorage.getItem("tasks")) {
+      try {
+        this.tasks = JSON.parse(localStorage.getItem("tasks"));
+      } catch (e) {
+        localStorage.removeItem("tasks");
+      }
+    }
   },
 
   computed: {
@@ -192,6 +199,19 @@ export default {
     },
     orderBy(event) {
       this.tasks = _.orderBy(this.tasks, ["title"], [event.target.value]);
+    },
+    addTask() {
+      // ensure they actually typed something
+      if (!this.newTask) {
+        return;
+      }
+      this.tasks.push(this.newTask);
+      this.newTask = "";
+      this.saveTask();
+    },
+    saveTask() {
+      const parsed = JSON.stringify(this.tasks);
+      localStorage.setItem("task", parsed);
     },
   },
 };
